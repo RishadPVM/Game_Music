@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: #080112;
+  font-family: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #f3f4f6;
+  overflow-x: hidden;
+  image-rendering: pixelated;
+}
+
+/* Perspective scrolling neon floor grid */
+.grid-container {
+  perspective: 320px;
+  perspective-origin: 50% 20%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 50vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.grid-floor {
+  position: absolute;
+  top: -100%;
+  left: -50%;
+  width: 200%;
+  height: 300%;
+  background-size: 80px 80px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.25) 2px, transparent 2px),
+    linear-gradient(to bottom, rgba(255, 0, 127, 0.25) 2px, transparent 2px);
+  transform: rotateX(75deg);
+  transform-origin: 50% 0%;
+}
+
+.grid-floor.animated {
+  animation: gridScroll 10s linear infinite;
+}
+
+@keyframes gridScroll {
+  0% { transform: rotateX(75deg) translateY(0); }
+  100% { transform: rotateX(75deg) translateY(80px); }
+}
+
+/* CRT Screen Scanlines & Vignette */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.scanlines::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.7) 130%);
+  pointer-events: none;
+}
+
+/* CRT Screen Glitch & Flicker */
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.985; }
+  50% { opacity: 1; }
+  100% { opacity: 0.99; }
+}
+
+/* Glowing aesthetic helpers */
+.glow-text-pink {
+  text-shadow: 0 0 5px #ff007f, 0 0 10px #ff007f, 0 0 20px rgba(255, 0, 127, 0.6);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.6);
+}
+
+.glow-text-purple {
+  text-shadow: 0 0 5px #b026ff, 0 0 10px #b026ff, 0 0 20px rgba(176, 38, 255, 0.6);
+}
+
+/* Vaporwave glassmorphism cards */
+.vapor-window {
+  background: rgba(12, 3, 24, 0.85);
+  border: 2px solid #ff007f;
+  box-shadow: 
+    0 0 15px rgba(255, 0, 127, 0.4), 
+    inset 0 0 15px rgba(255, 0, 127, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.vapor-window-cyan {
+  background: rgba(12, 3, 24, 0.85);
+  border: 2px solid #00f0ff;
+  box-shadow: 
+    0 0 15px rgba(0, 240, 255, 0.4), 
+    inset 0 0 15px rgba(0, 240, 255, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+.vapor-window-purple {
+  background: rgba(12, 3, 24, 0.85);
+  border: 2px solid #b026ff;
+  box-shadow: 
+    0 0 15px rgba(176, 38, 255, 0.4), 
+    inset 0 0 15px rgba(176, 38, 255, 0.15);
+  backdrop-filter: blur(12px);
+}
+
+/* Cyber grid horizon overlay */
+.horizon-glow {
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  width: 100vw;
+  height: 2px;
+  background: #ff007f;
+  box-shadow: 0 0 15px 4px #ff007f, 0 0 30px 8px #b026ff;
+  z-index: 2;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080112;
+}
+::-webkit-scrollbar-thumb {
+  background: #b026ff;
+  border-radius: 4px;
+  border: 1px solid #ff007f;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff007f;
+}
